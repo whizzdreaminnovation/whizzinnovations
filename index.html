@@ -1,12 +1,4 @@
-<div class="flex items-center space-x-4">
-  <img src="Logo.jpg" alt="Whizz Dream innovation" class="h-20 w- 20 object-contain">
-  <h1 class="text-2xl font-bold">Whizz Dream innovation</h1>
-</div>
-
 <!DOCTYPE html>
-<html>
-  <head>
-  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -17,10 +9,13 @@
 <body class="bg-gradient-to-br from-purple-900 to-blue-900 text-white min-h-screen font-sans">
 
   <!-- Header -->
-  <header class="bg-white text-purple-900 shadow-md">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Whizz Dream Big</h1>
-      <nav class="space-x-6 font-medium">
+  <header class="bg-white text-purple-900 shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between space-y-2 sm:space-y-0">
+      <div class="flex items-center space-x-4">
+        <img src="Logo.jpg" alt="Whizz Dream innovation" class="h-16 w-16 object-contain" />
+        <h1 class="text-xl sm:text-2xl font-bold text-center sm:text-left">Whizz Dream innovation</h1>
+      </div>
+      <nav class="space-x-4 text-center sm:text-right">
         <a href="#" class="hover:text-blue-700">Home</a>
         <a href="#services" class="hover:text-blue-700">Services</a>
         <a href="#about" class="hover:text-blue-700">About</a>
@@ -41,10 +36,12 @@
     <div class="max-w-7xl mx-auto text-center">
       <h3 class="text-3xl font-bold mb-10">Our Services</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <!-- Repeat for each service -->
         <div class="p-6 bg-purple-50 rounded-xl shadow-md">
           <h4 class="text-xl font-semibold mb-2">IT Consultancy</h4>
           <p>Expert advisory in IT strategy, system design, and global tech implementation.</p>
         </div>
+        <!-- Add other services here -->
         <div class="p-6 bg-purple-50 rounded-xl shadow-md">
           <h4 class="text-xl font-semibold mb-2">Software Development</h4>
           <p>Custom software, web solutions, ERP systems, and e-commerce tools.</p>
@@ -97,9 +94,3 @@
 
 </body>
 </html>
-
-  </footer>
-
-</body>
-</html>
-
