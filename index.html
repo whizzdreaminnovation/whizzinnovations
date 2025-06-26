@@ -7,39 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<script>
-  const form = document.getElementById('contact-form');
-  const responseEl = document.getElementById('response');
-
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const data = {
-      name: document.getElementById('name').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      message: document.getElementById('message').value.trim(),
-    };
-
-    try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbz0vbGnyE7e38-3lRATgNAKsoMDx_nrHMXBS1tBl2htysLbMbaXELLaa6uLfUNALZOfgQ/exec', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      const result = await res.json();
-      if (result.result === "success") {
-        responseEl.textContent = "✅ Message sent successfully!";
-        form.reset();
-      } else {
-        responseEl.textContent = "⚠️ Something went wrong.";
-      }
-    } catch (err) {
-      responseEl.textContent = "❌ Submission failed. Please try again.";
-    }
-  });
-</script>
-
 <body class="bg-gradient-to-br from-purple-900 to-blue-900 text-white min-h-screen font-sans">
 
   <!-- Header -->
@@ -70,12 +37,10 @@
     <div class="max-w-7xl mx-auto text-center">
       <h3 class="text-3xl font-bold mb-10">Our Services</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <!-- Repeat for each service -->
         <div class="p-6 bg-purple-50 rounded-xl shadow-md">
           <h4 class="text-xl font-semibold mb-2">IT Consultancy</h4>
           <p>Expert advisory in IT strategy, system design, and global tech implementation.</p>
         </div>
-        <!-- Add other services here -->
         <div class="p-6 bg-purple-50 rounded-xl shadow-md">
           <h4 class="text-xl font-semibold mb-2">Software Development</h4>
           <p>Custom software, web solutions, ERP systems, and e-commerce tools.</p>
@@ -128,4 +93,36 @@
   </footer>
 
 </body>
+<script>
+  const form = document.getElementById('contact-form');
+  const responseEl = document.getElementById('response');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const data = {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      message: document.getElementById('message').value.trim(),
+    };
+
+    try {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbz0vbGnyE7e38-3lRATgNAKsoMDx_nrHMXBS1tBl2htysLbMbaXELLaa6uLfUNALZOfgQ/exec', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const result = await res.json();
+      if (result.result === "success") {
+        responseEl.textContent = "✅ Message sent successfully!";
+        form.reset();
+      } else {
+        responseEl.textContent = "⚠️ Something went wrong.";
+      }
+    } catch (err) {
+      responseEl.textContent = "❌ Submission failed. Please try again.";
+    }
+  });
+</script>
 </html>
