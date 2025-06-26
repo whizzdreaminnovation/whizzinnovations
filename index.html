@@ -100,16 +100,26 @@
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const formData = new FormData(form);
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    const params = new URLSearchParams();
+    params.append("name", name);
+    params.append("email", email);
+    params.append("message", message);
 
     try {
       const res = await fetch('https://script.google.com/macros/s/AKfycbz0vbGnyE7e38-3lRATgNAKsoMDx_nrHMXBS1tBl2htysLbMbaXELLaa6uLfUNALZOfgQ/exec', {
         method: 'POST',
-        body: formData
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: params.toString()
       });
 
       const resultText = await res.text();
-      if (res.ok && resultText.includes("success")) {
+      if (res.ok && resultText.toLowerCase().includes("success")) {
         responseEl.textContent = "✅ Message sent successfully!";
         form.reset();
       } else {
