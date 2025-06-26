@@ -100,21 +100,16 @@
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const data = {
-      name: document.getElementById('name').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      message: document.getElementById('message').value.trim(),
-    };
+    const formData = new FormData(form);
 
     try {
       const res = await fetch('https://script.google.com/macros/s/AKfycbz0vbGnyE7e38-3lRATgNAKsoMDx_nrHMXBS1tBl2htysLbMbaXELLaa6uLfUNALZOfgQ/exec', {
         method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' }
+        body: formData
       });
 
-      const result = await res.json();
-      if (result.result === "success") {
+      const resultText = await res.text();
+      if (res.ok && resultText.includes("success")) {
         responseEl.textContent = "✅ Message sent successfully!";
         form.reset();
       } else {
@@ -125,4 +120,5 @@
     }
   });
 </script>
+
 </html>
