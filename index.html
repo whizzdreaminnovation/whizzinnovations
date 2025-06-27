@@ -94,41 +94,37 @@
 
 </body>
 <script>
-  const form = document.getElementById('contact-form');
-  const responseEl = document.getElementById('response');
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbz0vbGnyE7e38-3lRATgNAKsoMDx_nrHMXBS1tBl2htysLbMbaXELLaa6uLfUNALZOfgQ/exec';
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
+    document.getElementById('contact-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
 
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+      try {
+        const response = await fetch(scriptURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
 
-    const params = new URLSearchParams();
-    params.append("name", name);
-    params.append("email", email);
-    params.append("message", message);
-
-    try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbz0vbGnyE7e38-3lRATgNAKsoMDx_nrHMXBS1tBl2htysLbMbaXELLaa6uLfUNALZOfgQ/exec', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: params.toString()
-      });
-
-      const resultText = await res.text();
-      if (res.ok && resultText.toLowerCase().includes("success")) {
-        responseEl.textContent = "✅ Message sent successfully!";
-        form.reset();
-      } else {
-        responseEl.textContent = "⚠️ Something went wrong.";
+        const result = await response.json();
+        if (result.result === 'success') {
+          document.getElementById('response').textContent = 'Thank you! Your message has been sent.';
+          form.reset();
+        } else {
+          document.getElementById('response').textContent = 'Error: Submission failed.';
+        }
+      } catch (error) {
+        document.getElementById('response').textContent = 'Error: Network or server issue.';
       }
-    } catch (err) {
-      responseEl.textContent = "❌ Submission failed. Please try again.";
-    }
-  });
+    });
 </script>
 
 </html>
